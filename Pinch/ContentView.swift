@@ -12,6 +12,13 @@ struct ContentView: View {
     @State private var imageScale: CGFloat = 1
     @State private var imageOffset: CGSize = .zero
     
+    func resetImageState(){
+        return withAnimation(.spring()){
+            imageScale = 1
+            imageOffset = .zero
+        }
+    }
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -30,12 +37,9 @@ struct ContentView: View {
                                 imageScale = 5
                             }
                         }else {
-                            withAnimation(.spring()){
-                                imageScale = 1
-                            }
+                            resetImageState()
                         }
                     })
-                    
                     .gesture(
                         DragGesture().onChanged{ gesture in
                             withAnimation(.linear(duration: 0.1)){
@@ -43,8 +47,8 @@ struct ContentView: View {
                             }
                         }
                             .onEnded{ _ in
-                                if imageScale <= 2{
-                                    imageOffset = .zero
+                                if imageScale <= 1{
+                                    resetImageState()
                                 }
                             }
                     )
