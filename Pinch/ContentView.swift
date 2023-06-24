@@ -72,9 +72,53 @@ struct ContentView: View {
                     .padding(.horizontal)
                     .padding(.top, 30)
             })
-            
-            
-            
+            .overlay(alignment: .bottom, content: {
+                Group{
+                    HStack{
+                        Button(action: {
+                            
+                            withAnimation(.spring()){
+                                if imageScale > 1{
+                                    imageScale -= 1
+                                    
+                                    if imageScale <= 1{
+                                        resetImageState()
+                                    }
+                                }
+                                
+                            }
+                        }, label: {
+                            ControlImageView(iconName: "minus.magnifyingglass")
+                                
+                        })
+                        
+                        Button(action: {
+                            resetImageState()
+                        }, label: {
+                            ControlImageView(iconName: "arrow.up.left.and.down.right.magnifyingglass")
+                        })
+                        
+                        Button(action: {
+                            
+                            withAnimation(.spring()){
+                                if imageScale < 5{
+                                    imageScale += 1
+                                }
+                            }
+                            
+                        }, label: {
+                            ControlImageView(iconName: "plus.magnifyingglass")
+                        })
+                    }//: HSTACK
+                    
+                    .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(15)
+                    
+                }//: GROUP
+                    .padding(.bottom, 20)
+                
+            })
         }//: NAVIGATION VIEW
         .navigationViewStyle(.stack)
     }
