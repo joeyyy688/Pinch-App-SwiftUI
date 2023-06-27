@@ -57,6 +57,27 @@ struct ContentView: View {
                                 }
                             }
                     )
+                    .gesture(
+                        MagnificationGesture().onChanged{ gesture in
+                            withAnimation(.linear(duration: 0.1)){
+                                if imageScale >= 1 && imageScale <= 5{
+                                    imageScale = gesture
+                                }else if imageScale > 5 {
+                                    imageScale = 5
+                                } else if imageScale < 1 {
+                                    imageScale = 1
+                                }
+                            }
+                        }
+                            .onEnded{ gesture in
+                                if imageScale > 5 {
+                                    imageScale = 5
+                                } else if  imageScale <= 1 {
+                                    resetImageState()
+                                }
+                                
+                            }
+                    )
                 
                 
             }//: ZSTACK
@@ -103,6 +124,10 @@ struct ContentView: View {
                             withAnimation(.spring()){
                                 if imageScale < 5{
                                     imageScale += 1
+                                    
+                                    if imageScale < 5{
+                                        imageScale = 5
+                                    }
                                 }
                             }
                             
