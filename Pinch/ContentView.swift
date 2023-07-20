@@ -138,7 +138,6 @@ struct ContentView: View {
                             ControlImageView(iconName: "plus.magnifyingglass")
                         })
                     }//: HSTACK
-                    
                     .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
                     .background(.ultraThinMaterial)
                     .cornerRadius(15)
